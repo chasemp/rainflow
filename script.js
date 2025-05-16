@@ -34,6 +34,7 @@ const audioFiles = [
     { file: 'audio/relax_waterfall.mp3', background: 'image/waterfall_bg.png', title: 'Waterfall', artist: 'Wikimedia Commons' },
     { file: 'audio/morning_garden.mp3', background: 'image/morning_garden_bg.png', title: 'Morning Garden', artist: 'Wikimedia Commons' },
     { file: 'audio/city_seaside_port.mp3', background: 'image/city_seaside_port_bg.png', title: 'Seaside City Port', artist: 'Wikimedia Commons' },
+    { file: 'audio/Dawn_Chorus.mp3', background: 'image/Dawn_Chorus_bg.png', title: 'Suburban Dawn', artist: 'Wikimedia Commons' },
     { file: 'audio/australia_lamington_national_park.mp3', background: 'image/australia_lamington_national_park_bg.png', title: 'Lamington National Park (Australia)', artist: 'Wikimedia Commons' },
     { file: 'audio/rain_song.mp3', background: 'image/rain_thunder_bg.png', title: 'Rain & Thunder', artist: 'Wikimedia Commons' }
 ];
