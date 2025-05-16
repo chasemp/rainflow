@@ -6,13 +6,19 @@
     <title>MP3 Player PWA</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icon.png">  <!-- Optional: Icon for iOS -->
-    <meta name="theme-color" content="#ffffff">  <!-- Customize theme color -->
+    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="theme-color" content="#ffffff">
 </head>
 <body>
-    <div class="container">
+
+    <div id="splash-screen">
+        <img src="splash-image.jpg" alt="Loading...">
+        <p>Loading...</p>
+    </div>
+
+    <div class="container" id="main-content" style="display: none;">
         <h1>MP3 Player</h1>
-        <audio id="audio-player" src="audio.mp3" preload="metadata"></audio>  <!-- preload attribute is important -->
+        <audio id="audio-player" src="audio.mp3" preload="metadata" loop></audio>
         <div class="controls">
             <button id="play-pause-btn">Play</button>
         </div>
