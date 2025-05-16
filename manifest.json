@@ -1,6 +1,6 @@
 {
-  "name": "Rainflow",
-  "short_name": "Rainflow",
+  "name": "MP3 Player PWA",
+  "short_name": "MP3 Player",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",

@@ -3,8 +3,14 @@ const urlsToCache = [
   'index.html',
   'style.css',
   'script.js',
-  'audio.mp3',
-  'icon.png' // Add your icon here
+  'audio1.mp3',
+  'audio2.mp3',
+  'audio3.mp3',
+  'background1.png',
+  'background2.png',
+  'background3.png',
+  'icon.png',
+  'splash-image.jpg'
 ];
 
 self.addEventListener('install', event => {
