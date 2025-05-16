@@ -21,13 +21,17 @@ const audioSelect = document.getElementById('audio-select'); // Get the select e
 const prevBtn = document.getElementById('prev-btn'); // Previous button
 const nextBtn = document.getElementById('next-btn'); // Next button
 const body = document.querySelector('body'); // Get the body element
+const volumeSlider = document.getElementById('volume-slider'); // Volume slider
+const currentTrackTitle = document.getElementById('track-title'); // Track title
+const currentTrackArtist = document.getElementById('track-artist'); // Track artist
+
 let isPlaying = false;
 
 // Array of audio files and corresponding background images
 const audioFiles = [
-    { file: 'audio1.mp3', background: 'background1.png' },
-    { file: 'audio2.mp3', background: 'background2.png' },
-    { file: 'audio3.mp3', background: 'background3.png' }
+    { file: 'audio1.mp3', background: 'background1.png', title: 'Track 1 Title', artist: 'Artist 1' },
+    { file: 'audio2.mp3', background: 'background2.png', title: 'Track 2 Title', artist: 'Artist 2' },
+    { file: 'audio3.mp3', background: 'background3.png', title: 'Track 3 Title', artist: 'Artist 3' }
 ];
 
 // Function to update the audio source and background
@@ -35,6 +39,12 @@ function updateAudioSource(newSource) {
     audioPlayer.src = newSource.file;
     audioPlayer.load();
     body.style.backgroundImage = `url("${newSource.background}")`;
+
+    // Update track title and artist
+    currentTrackTitle.textContent = newSource.title;
+    currentTrackArtist.textContent = newSource.artist;
+
+    localStorage.setItem('lastTrack', newSource.file); // Persist track selection
 
     if (isPlaying) {
         audioPlayer.play();
@@ -90,4 +100,29 @@ playPauseBtn.addEventListener('click', () => {
 audioPlayer.addEventListener('ended', () => {
     isPlaying = false;
     playPauseBtn.textContent = 'Play';
+});
+
+// Volume Control Event Listener
+volumeSlider.addEventListener('input', () => {
+    audioPlayer.volume = volumeSlider.value;
+    localStorage.setItem('volume', volumeSlider.value); // Persist Volume
+});
+
+// Load persisted track and volume on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const lastTrack = localStorage.getItem('lastTrack');
+    const volume = localStorage.getItem('volume');
+
+    if (lastTrack) {
+        audioSelect.value = lastTrack; // Set dropdown to last track
+        const selectedTrack = audioFiles.find(track => track.file === lastTrack);
+        if (selectedTrack) {
+            updateAudioSource(selectedTrack);
+        }
+    }
+
+    if (volume) {
+        volumeSlider.value = volume; // Set volume slider to last volume
+        audioPlayer.volume = volume;
+    }
 });
