@@ -18,9 +18,24 @@
 
     <div class="container" id="main-content" style="display: none;">
         <h1>MP3 Player</h1>
-        <audio id="audio-player" src="audio.mp3" preload="metadata" loop></audio>
+
+        <!-- Audio Selection -->
+        <div class="audio-selector">
+            <label for="audio-select">Choose Background Audio:</label>
+            <select id="audio-select">
+                <option value="audio1.mp3">Audio 1</option>
+                <option value="audio2.mp3">Audio 2</option>
+                <option value="audio3.mp3">Audio 3</option>
+            </select>
+        </div>
+
+        <audio id="audio-player" src="audio1.mp3" preload="metadata" loop></audio>
         <div class="controls">
             <button id="play-pause-btn">Play</button>
+            <div>
+                <button id="prev-btn">&lt;&lt;&lt;</button>
+                <button id="next-btn">&gt;&gt;&gt;</button>
+            </div>
         </div>
     </div>
 
