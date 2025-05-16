@@ -10,6 +10,7 @@ const urlsToCache = [
   'audio/rain_song.mp3',
   'audio/city_seaside_port.mp3',
   'audio/morning_garden.mp3',
+  'audio/Dawn_Chorus.mp3',
   'image/calm_rain_bg.png',
   'image/morning_garden_bg.png',
   'image/city_seaside_port_bg.png',
