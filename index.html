@@ -37,6 +37,17 @@
                 <button id="next-btn">&gt;&gt;&gt;</button>
             </div>
         </div>
+
+        <!-- Volume Control -->
+        <div class="volume-control">
+            <label for="volume-slider">Volume:</label>
+            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+        </div>
+
+        <!-- Track Information -->
+        <div class="track-info">
+            <p id="current-track">Now Playing: <span id="track-title">Unknown</span> - <span id="track-artist">Unknown</span></p>
+        </div>
     </div>
 
     <script src="script.js"></script>

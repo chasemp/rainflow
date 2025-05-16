@@ -73,3 +73,18 @@ body {
     padding: 5px;
     font-size: 14px;
 }
+
+/* Volume Control Styling */
+.volume-control {
+    margin-top: 10px;
+}
+
+.volume-control label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Track Info Styling */
+.track-info {
+    margin-top: 10px;
+}
