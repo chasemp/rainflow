@@ -29,9 +29,11 @@ let isPlaying = false;
 
 // Array of audio files and corresponding background images
 const audioFiles = [
-    { file: 'audio1.mp3', background: 'background1.png', title: 'Track 1 Title', artist: 'Artist 1' },
-    { file: 'audio2.mp3', background: 'background2.png', title: 'Track 2 Title', artist: 'Artist 2' },
-    { file: 'audio3.mp3', background: 'background3.png', title: 'Track 3 Title', artist: 'Artist 3' }
+    { file: 'audio/light_rain.mp3', background: 'image/light_rain_bg.png', title: 'Light Rain', artist: 'Wikimedia Commons' },
+    { file: 'audio/calm_rain.mp3', background: 'image/calm_rain_bg.png', title: 'Calming Rain', artist: 'Wikimedia Commons' },
+    { file: 'audio/relax_waterfall.mp3', background: 'image/waterfall_bg.png', title: 'Waterfall', artist: 'Wikimedia Commons' },
+    { file: 'audio/australia_lamington_national_park.mp3', background: 'image/australia_lamington_national_park_bg.png', title: 'Lamington National Park (Australia)', artist: 'Wikimedia Commons' },
+    { file: 'audio/rain_song.mp3', background: 'image/rain_thunder_bg.png', title: 'Rain & Thunder', artist: 'Wikimedia Commons' }
 ];
 
 // Function to update the audio source and background

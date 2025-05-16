@@ -4,7 +4,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url("background1.png"); /* Default background image */
+    background-image: url("image/light_rain_bg.png"); /* Default background image */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
