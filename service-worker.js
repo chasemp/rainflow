@@ -10,7 +10,7 @@ const urlsToCache = [
   'background2.png',
   'background3.png',
   'icon.png',
-  'splash-image.jpg'
+  'splash-image.png'
 ];
 
 self.addEventListener('install', event => {
