@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MP3 Player PWA</title>
+    <title>Rainflow - Sound for the Background</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icon.png">
@@ -21,15 +21,16 @@
 
         <!-- Audio Selection -->
         <div class="audio-selector">
-            <label for="audio-select">Choose Background Audio:</label>
             <select id="audio-select">
-                <option value="audio1.mp3">Audio 1</option>
-                <option value="audio2.mp3">Audio 2</option>
-                <option value="audio3.mp3">Audio 3</option>
+                <option value="audio/light_rain.mp3">Light Rain</option>
+                <option value="audio/calm_rain.mp3">Calming Rain</option>
+                <option value="audio/relax_waterfall.mp3">Waterfall</option>
+                <option value="audio/australia_lamington_national_park.mp3">Lamington National Park (Australia)</option>
+                <option value="audio/rain_song.mp3">Rain and Thunder</option>
             </select>
         </div>
 
-        <audio id="audio-player" src="audio1.mp3" preload="metadata" loop></audio>
+        <audio id="audio-player" src="audio/light_rain.mp3" preload="metadata" loop></audio>
         <div class="controls">
             <button id="play-pause-btn">Play</button>
             <div>
