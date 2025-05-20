@@ -419,3 +419,58 @@ document.addEventListener('DOMContentLoaded', () => {
         audioPlayer.volume = volume;
     }
 });
+
+// Add online/offline status handling
+async function checkServerConnectivity() {
+    try {
+        const response = await fetch('/icon.png', { method: 'HEAD' });
+        return response.ok;
+    } catch (error) {
+        console.log('Server connectivity check failed:', error);
+        return false;
+    }
+}
+
+async function updateOnlineStatus() {
+    const wifiStatus = document.getElementById('wifi-status');
+    if (!wifiStatus) return;
+
+    const isServerReachable = await checkServerConnectivity();
+    
+    if (navigator.onLine && isServerReachable) {
+        wifiStatus.classList.remove('offline');
+        wifiStatus.title = 'Online';
+        console.log('App is online and server is reachable');
+    } else {
+        wifiStatus.classList.add('offline');
+        wifiStatus.title = 'Offline';
+        console.log('App is offline or server is unreachable');
+    }
+}
+
+// Add event listeners for online/offline status
+window.addEventListener('online', () => {
+    console.log('Network connection restored');
+    updateOnlineStatus();
+});
+
+window.addEventListener('offline', () => {
+    console.log('Network connection lost');
+    updateOnlineStatus();
+});
+
+// Check connectivity periodically
+setInterval(updateOnlineStatus, 30000); // Check every 30 seconds
+
+// Initialize online status when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    // Check initial online status
+    updateOnlineStatus();
+    
+    // Rest of your existing DOMContentLoaded code...
+    console.log('Initial favorites on page load:', favorites);
+    
+    const heartIcon = document.querySelector('.track-heart');
+    const favoriteCheckbox = document.querySelector('#favorite-track');
+    // ... rest of the existing code ...
+});

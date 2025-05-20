@@ -17,6 +17,7 @@
     </div>
 
     <div class="container" id="main-content" style="display: none;">
+        <div class="wifi-status" id="wifi-status" title="Online"></div>
         <h1>Rainflow Sounds</h1>
 
         <!-- Audio Selection -->
@@ -30,7 +31,7 @@
                     <option value="audio/city_seaside_port.mp3">Seaside City Port</option>
                     <option value="audio/Dawn_Chorus.mp3">Suburban Dawn</option>
                     <option value="audio/australia_lamington_national_park.mp3">Lamington National Park (Australia)</option>
-                    <option value="audio/rain_song.mp3">Rain and Thunder</option>
+                    <option value="audio/rain_song.mp3">Rain & Thunder</option>
                 </select>
                 <input type="checkbox" id="favorite-track" class="favorite-checkbox" title="Add this track to your favorites">
                 <span class="track-heart" title="Favorites Only">❤️</span>
@@ -48,14 +49,15 @@
 
         <!-- Volume Control -->
         <div class="volume-control">
-            <label for="volume-slider">Volume:</label>
-            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" title="Volume Control">
         </div>
 
         <!-- Track Information -->
         <div class="track-info">
             <p id="current-track">Now Playing: <span id="track-title">Unknown</span> - <span id="track-artist">Unknown</span></p>
         </div>
+
+        <div class="copyright">© 2024 523.life</div>
     </div>
 
     <script src="script.js"></script>
