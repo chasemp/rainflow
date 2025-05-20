@@ -94,17 +94,17 @@ nextBtn.addEventListener('click', () => {
 playPauseBtn.addEventListener('click', () => {
     if (isPlaying) {
         audioPlayer.pause();
-        playPauseBtn.textContent = 'Play';
+        playPauseBtn.textContent = '▶️';
     } else {
         audioPlayer.play();
-        playPauseBtn.textContent = 'Pause';
+        playPauseBtn.textContent = '⏸️';
     }
     isPlaying = !isPlaying;
 });
 
 audioPlayer.addEventListener('ended', () => {
     isPlaying = false;
-    playPauseBtn.textContent = 'Play';
+    playPauseBtn.textContent = '▶️';
 });
 
 // Volume Control Event Listener
@@ -124,6 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (selectedTrack) {
             updateAudioSource(selectedTrack);
         }
+    } else {
+        // Initialize with the first track (Light Rain)
+        const initialTrack = audioFiles[0];
+        updateAudioSource(initialTrack);
     }
 
     if (volume) {

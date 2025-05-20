@@ -23,18 +23,37 @@ body {
     margin-top: 10px;
 }
 
-.controls button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 5px; /* Add some spacing */
-}
-
-/* Center the previous/next button container */
-.controls > div {
+.player-controls {
     display: flex;
     justify-content: center;
-    margin-top: 5px;
+    align-items: center;
+    gap: 5px;
+}
+
+.controls button {
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 29px;
+    background-color: transparent;
+    color: #333;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.controls button:hover {
+    transform: scale(1.1);
+}
+
+#play-pause-btn {
+    width: 90px;
+    height: 90px;
+    font-size: 42px;
 }
 
 #splash-screen {
