@@ -25,6 +25,16 @@ const ASSETS_TO_CACHE = [
     '/image/rain_thunder_bg.png'
 ];
 
+// Helper function to check if a URL is cacheable
+function isCacheable(url) {
+    try {
+        const urlObj = new URL(url);
+        return urlObj.protocol === 'http:' || urlObj.protocol === 'https:';
+    } catch (e) {
+        return false;
+    }
+}
+
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME)
@@ -42,12 +52,21 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+    // Skip non-GET requests
+    if (event.request.method !== 'GET') return;
+
+    // Skip non-cacheable URLs
+    if (!isCacheable(event.request.url)) {
+        return;
+    }
+
     event.respondWith(
         caches.match(event.request)
             .then((response) => {
                 if (response) {
                     return response;
                 }
+
                 return fetch(event.request)
                     .then((response) => {
                         // Check if we received a valid response
@@ -61,26 +80,39 @@ self.addEventListener('fetch', (event) => {
                         // Cache the fetched response
                         caches.open(CACHE_NAME)
                             .then((cache) => {
-                                cache.put(event.request, responseToCache);
+                                if (isCacheable(event.request.url)) {
+                                    cache.put(event.request, responseToCache)
+                                        .catch(error => {
+                                            console.warn('Failed to cache response:', error);
+                                        });
+                                }
+                            })
+                            .catch(error => {
+                                console.warn('Failed to open cache:', error);
                             });
 
                         return response;
+                    })
+                    .catch(error => {
+                        console.warn('Fetch failed:', error);
+                        // Return a fallback response if available
+                        return caches.match('/offline.html');
                     });
             })
     );
 });
 
 self.addEventListener('activate', event => {
-  const cacheWhitelist = [CACHE_NAME];
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
+    const cacheWhitelist = [CACHE_NAME];
+    event.waitUntil(
+        caches.keys().then(cacheNames => {
+            return Promise.all(
+                cacheNames.map(cacheName => {
+                    if (cacheWhitelist.indexOf(cacheName) === -1) {
+                        return caches.delete(cacheName);
+                    }
+                })
+            );
         })
-      );
-    })
-  );
+    );
 });
