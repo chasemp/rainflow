@@ -113,6 +113,52 @@ volumeSlider.addEventListener('input', () => {
     localStorage.setItem('volume', volumeSlider.value); // Persist Volume
 });
 
+// Keyboard Controls
+document.addEventListener('keydown', (event) => {
+    // Prevent default behavior for space bar to avoid page scrolling
+    if (event.code === 'Space') {
+        event.preventDefault();
+    }
+    
+    switch(event.code) {
+        case 'Space':
+            // Toggle play/pause
+            if (isPlaying) {
+                audioPlayer.pause();
+                playPauseBtn.textContent = '▶️';
+            } else {
+                audioPlayer.play();
+                playPauseBtn.textContent = '⏸️';
+            }
+            isPlaying = !isPlaying;
+            break;
+            
+        case 'ArrowLeft':
+            // Previous track
+            let prevIndex = audioFiles.findIndex(track => audioPlayer.src.includes(track.file));
+            if (prevIndex > 0) {
+                prevIndex--;
+            } else {
+                prevIndex = audioFiles.length - 1;
+            }
+            audioSelect.value = audioFiles[prevIndex].file;
+            updateAudioSource(audioFiles[prevIndex]);
+            break;
+            
+        case 'ArrowRight':
+            // Next track
+            let nextIndex = audioFiles.findIndex(track => audioPlayer.src.includes(track.file));
+            if (nextIndex < audioFiles.length - 1) {
+                nextIndex++;
+            } else {
+                nextIndex = 0;
+            }
+            audioSelect.value = audioFiles[nextIndex].file;
+            updateAudioSource(audioFiles[nextIndex]);
+            break;
+    }
+});
+
 // Load persisted track and volume on page load
 document.addEventListener('DOMContentLoaded', () => {
     const lastTrack = localStorage.getItem('lastTrack');
