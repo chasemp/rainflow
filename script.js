@@ -24,8 +24,24 @@ const body = document.querySelector('body'); // Get the body element
 const volumeSlider = document.getElementById('volume-slider'); // Volume slider
 const currentTrackTitle = document.getElementById('track-title'); // Track title
 const currentTrackArtist = document.getElementById('track-artist'); // Track artist
+const favoritesToggle = document.getElementById('favorites-toggle');
 
 let isPlaying = false;
+let isFadeInProgress = false;
+let favoritesOnly = false;
+let favorites = [];
+
+// Load favorites from localStorage when the script starts
+try {
+    const savedFavorites = localStorage.getItem('favorites');
+    if (savedFavorites) {
+        favorites = JSON.parse(savedFavorites);
+        console.log('Loaded favorites from localStorage:', favorites);
+    }
+} catch (error) {
+    console.error('Error loading favorites:', error);
+    favorites = [];
+}
 
 // Array of audio files and corresponding background images
 const audioFiles = [
@@ -39,20 +55,140 @@ const audioFiles = [
     { file: 'audio/rain_song.mp3', background: 'image/rain_thunder_bg.png', title: 'Rain & Thunder', artist: 'Wikimedia Commons' }
 ];
 
-// Function to update the audio source and background
-function updateAudioSource(newSource) {
+// Fade effect functions
+function fadeOut(duration = 500) {
+    return new Promise(resolve => {
+        if (isFadeInProgress) return resolve();
+        isFadeInProgress = true;
+        
+        const startVolume = audioPlayer.volume;
+        const startTime = performance.now();
+        
+        function fade() {
+            const elapsed = performance.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            audioPlayer.volume = startVolume * (1 - progress);
+            
+            if (progress < 1) {
+                requestAnimationFrame(fade);
+            } else {
+                isFadeInProgress = false;
+                resolve();
+            }
+        }
+        
+        fade();
+    });
+}
+
+function fadeIn(duration = 500) {
+    return new Promise(resolve => {
+        if (isFadeInProgress) return resolve();
+        isFadeInProgress = true;
+        
+        const targetVolume = volumeSlider.value;
+        const startTime = performance.now();
+        
+        function fade() {
+            const elapsed = performance.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            audioPlayer.volume = targetVolume * progress;
+            
+            if (progress < 1) {
+                requestAnimationFrame(fade);
+            } else {
+                isFadeInProgress = false;
+                resolve();
+            }
+        }
+        
+        fade();
+    });
+}
+
+// Function to save favorites to localStorage
+function saveFavorites() {
+    try {
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log('Saved favorites:', favorites);
+    } catch (error) {
+        console.error('Error saving favorites:', error);
+    }
+}
+
+// Function to update checkbox state
+function updateFavoriteCheckbox(trackFile) {
+    const favoriteCheckbox = document.querySelector('#favorite-track');
+    if (favoriteCheckbox) {
+        const isFavorite = favorites.includes(trackFile);
+        favoriteCheckbox.checked = isFavorite;
+        console.log('Updated checkbox for track:', trackFile, 'Checked:', isFavorite, 'Current favorites:', favorites);
+    }
+}
+
+// Update the toggleFavorite function
+function toggleFavorite(trackFile) {
+    console.log('Toggling favorite for track:', trackFile);
+    console.log('Current favorites before toggle:', favorites);
+    
+    const index = favorites.indexOf(trackFile);
+    if (index === -1) {
+        favorites.push(trackFile);
+        console.log('Added to favorites');
+    } else {
+        favorites.splice(index, 1);
+        console.log('Removed from favorites');
+    }
+    
+    saveFavorites();
+    updateFavoriteCheckbox(trackFile);
+    updateSelectOptions();
+}
+
+function updateSelectOptions() {
+    const currentValue = audioSelect.value;
+    audioSelect.innerHTML = '';
+    
+    audioFiles.forEach(track => {
+        if (!favoritesOnly || favorites.includes(track.file)) {
+            const option = document.createElement('option');
+            option.value = track.file;
+            option.textContent = track.title;
+            audioSelect.appendChild(option);
+        }
+    });
+    
+    audioSelect.value = currentValue;
+}
+
+// Add heart icon to the track info section
+function updateTrackInfo(newSource) {
+    const trackInfo = document.querySelector('.track-info p');
+    trackInfo.innerHTML = `Now Playing: <span id="track-title">${newSource.title}</span> - <span id="track-artist">${newSource.artist}</span>`;
+    updateFavoriteCheckbox(newSource.file);
+}
+
+// Update the updateAudioSource function
+async function updateAudioSource(newSource) {
+    if (isPlaying) {
+        await fadeOut();
+    }
+    
     audioPlayer.src = newSource.file;
     audioPlayer.load();
     body.style.backgroundImage = `url("${newSource.background}")`;
 
-    // Update track title and artist
-    currentTrackTitle.textContent = newSource.title;
-    currentTrackArtist.textContent = newSource.artist;
-
-    localStorage.setItem('lastTrack', newSource.file); // Persist track selection
+    updateTrackInfo(newSource);
+    localStorage.setItem('lastTrack', newSource.file);
+    
+    // Update checkbox state
+    updateFavoriteCheckbox(newSource.file);
 
     if (isPlaying) {
         audioPlayer.play();
+        await fadeIn();
     }
 }
 
@@ -91,12 +227,15 @@ nextBtn.addEventListener('click', () => {
     updateAudioSource(audioFiles[currentIndex]);
 });
 
-playPauseBtn.addEventListener('click', () => {
+// Update play/pause to include fade effects
+playPauseBtn.addEventListener('click', async () => {
     if (isPlaying) {
+        await fadeOut();
         audioPlayer.pause();
         playPauseBtn.textContent = '▶️';
     } else {
         audioPlayer.play();
+        await fadeIn();
         playPauseBtn.textContent = '⏸️';
     }
     isPlaying = !isPlaying;
@@ -113,28 +252,94 @@ volumeSlider.addEventListener('input', () => {
     localStorage.setItem('volume', volumeSlider.value); // Persist Volume
 });
 
-// Keyboard Controls
-document.addEventListener('keydown', (event) => {
-    // Prevent default behavior for space bar to avoid page scrolling
+// Add event listeners for favorites controls
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Initial favorites on page load:', favorites);
+    
+    const heartIcon = document.querySelector('.track-heart');
+    const favoriteCheckbox = document.querySelector('#favorite-track');
+
+    if (heartIcon) {
+        heartIcon.onclick = (e) => {
+            e.stopPropagation();
+            favoritesOnly = !favoritesOnly;
+            heartIcon.textContent = favoritesOnly ? '💖' : '❤️';
+            
+            // Get current track
+            const currentTrack = audioFiles.find(track => track.file === audioSelect.value);
+            
+            // Update select options
+            updateSelectOptions();
+            
+            if (favoritesOnly) {
+                // If current track is not in favorites, switch to first favorite track
+                if (!favorites.includes(currentTrack.file)) {
+                    const firstFavoriteTrack = audioFiles.find(track => favorites.includes(track.file));
+                    if (firstFavoriteTrack) {
+                        audioSelect.value = firstFavoriteTrack.file;
+                        updateAudioSource(firstFavoriteTrack);
+                        if (isPlaying) {
+                            audioPlayer.play();
+                        }
+                    }
+                }
+            }
+        };
+    }
+
+    if (favoriteCheckbox) {
+        favoriteCheckbox.onchange = (e) => {
+            e.stopPropagation();
+            const currentTrack = audioFiles.find(track => track.file === audioSelect.value);
+            if (currentTrack) {
+                console.log('Checkbox changed for track:', currentTrack.file);
+                toggleFavorite(currentTrack.file);
+            }
+        };
+    }
+
+    // Add change event listener to the select element
+    if (audioSelect) {
+        audioSelect.addEventListener('change', () => {
+            const selectedTrack = audioFiles.find(track => track.file === audioSelect.value);
+            if (selectedTrack) {
+                console.log('Track changed to:', selectedTrack.file);
+                updateAudioSource(selectedTrack);
+            }
+        });
+    }
+
+    // Initialize favorites and track info
+    updateSelectOptions();
+    const initialTrack = audioFiles.find(track => track.file === audioSelect.value);
+    if (initialTrack) {
+        console.log('Initializing with track:', initialTrack.file);
+        updateTrackInfo(initialTrack);
+        updateFavoriteCheckbox(initialTrack.file);
+    }
+});
+
+// Update keyboard controls to include fade effects and favorites toggle
+document.addEventListener('keydown', async (event) => {
     if (event.code === 'Space') {
         event.preventDefault();
     }
     
     switch(event.code) {
         case 'Space':
-            // Toggle play/pause
             if (isPlaying) {
+                await fadeOut();
                 audioPlayer.pause();
                 playPauseBtn.textContent = '▶️';
             } else {
                 audioPlayer.play();
+                await fadeIn();
                 playPauseBtn.textContent = '⏸️';
             }
             isPlaying = !isPlaying;
             break;
             
         case 'ArrowLeft':
-            // Previous track
             let prevIndex = audioFiles.findIndex(track => audioPlayer.src.includes(track.file));
             if (prevIndex > 0) {
                 prevIndex--;
@@ -142,11 +347,10 @@ document.addEventListener('keydown', (event) => {
                 prevIndex = audioFiles.length - 1;
             }
             audioSelect.value = audioFiles[prevIndex].file;
-            updateAudioSource(audioFiles[prevIndex]);
+            await updateAudioSource(audioFiles[prevIndex]);
             break;
             
         case 'ArrowRight':
-            // Next track
             let nextIndex = audioFiles.findIndex(track => audioPlayer.src.includes(track.file));
             if (nextIndex < audioFiles.length - 1) {
                 nextIndex++;
@@ -154,13 +358,45 @@ document.addEventListener('keydown', (event) => {
                 nextIndex = 0;
             }
             audioSelect.value = audioFiles[nextIndex].file;
-            updateAudioSource(audioFiles[nextIndex]);
+            await updateAudioSource(audioFiles[nextIndex]);
+            break;
+
+        case 'KeyF':
+            // Toggle favorites playlist
+            const heartIcon = document.querySelector('.track-heart');
+            if (heartIcon) {
+                favoritesOnly = !favoritesOnly;
+                heartIcon.textContent = favoritesOnly ? '💖' : '❤️';
+                
+                // Get current track
+                const currentTrack = audioFiles.find(track => track.file === audioSelect.value);
+                
+                // Update select options
+                updateSelectOptions();
+                
+                if (favoritesOnly) {
+                    // If current track is not in favorites, switch to first favorite track
+                    if (!favorites.includes(currentTrack.file)) {
+                        const firstFavoriteTrack = audioFiles.find(track => favorites.includes(track.file));
+                        if (firstFavoriteTrack) {
+                            audioSelect.value = firstFavoriteTrack.file;
+                            updateAudioSource(firstFavoriteTrack);
+                            if (isPlaying) {
+                                audioPlayer.play();
+                            }
+                        }
+                    }
+                }
+            }
             break;
     }
 });
 
 // Load persisted track and volume on page load
 document.addEventListener('DOMContentLoaded', () => {
+    // Load favorites from localStorage
+    favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    
     const lastTrack = localStorage.getItem('lastTrack');
     const volume = localStorage.getItem('volume');
 
@@ -169,11 +405,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedTrack = audioFiles.find(track => track.file === lastTrack);
         if (selectedTrack) {
             updateAudioSource(selectedTrack);
+            updateFavoriteCheckbox(selectedTrack.file);
         }
     } else {
         // Initialize with the first track (Light Rain)
         const initialTrack = audioFiles[0];
         updateAudioSource(initialTrack);
+        updateFavoriteCheckbox(initialTrack.file);
     }
 
     if (volume) {

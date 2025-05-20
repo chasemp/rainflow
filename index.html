@@ -21,16 +21,20 @@
 
         <!-- Audio Selection -->
         <div class="audio-selector">
-            <select id="audio-select">
-                <option value="audio/light_rain.mp3">Light Rain</option>
-                <option value="audio/calm_rain.mp3">Calming Rain</option>
-                <option value="audio/relax_waterfall.mp3">Waterfall</option>
-                <option value="audio/morning_garden.mp3">Morning Garden</option>
-                <option value="audio/city_seaside_port.mp3">Seaside City Port</option>
-                <option value="audio/Dawn_Chorus.mp3">Suburban Dawn</option>
-                <option value="audio/australia_lamington_national_park.mp3">Lamington National Park (Australia)</option>
-                <option value="audio/rain_song.mp3">Rain and Thunder</option>
-            </select>
+            <div class="audio-controls">
+                <select id="audio-select">
+                    <option value="audio/light_rain.mp3">Light Rain</option>
+                    <option value="audio/calm_rain.mp3">Calming Rain</option>
+                    <option value="audio/relax_waterfall.mp3">Waterfall</option>
+                    <option value="audio/morning_garden.mp3">Morning Garden</option>
+                    <option value="audio/city_seaside_port.mp3">Seaside City Port</option>
+                    <option value="audio/Dawn_Chorus.mp3">Suburban Dawn</option>
+                    <option value="audio/australia_lamington_national_park.mp3">Lamington National Park (Australia)</option>
+                    <option value="audio/rain_song.mp3">Rain and Thunder</option>
+                </select>
+                <input type="checkbox" id="favorite-track" class="favorite-checkbox" title="Add this track to your favorites">
+                <span class="track-heart" title="Favorites Only">❤️</span>
+            </div>
         </div>
 
         <audio id="audio-player" src="audio/light_rain.mp3" preload="metadata" loop></audio>
