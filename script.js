@@ -45,14 +45,60 @@ try {
 
 // Array of audio files and corresponding background images
 const audioFiles = [
-    { file: 'audio/light_rain.mp3', background: 'image/light_rain_bg.png', title: 'Light Rain', artist: 'Wikimedia Commons' },
-    { file: 'audio/calm_rain.mp3', background: 'image/calm_rain_bg.png', title: 'Calming Rain', artist: 'Wikimedia Commons' },
-    { file: 'audio/relax_waterfall.mp3', background: 'image/waterfall_bg.png', title: 'Waterfall', artist: 'Wikimedia Commons' },
-    { file: 'audio/morning_garden.mp3', background: 'image/morning_garden_bg.png', title: 'Morning Garden', artist: 'Wikimedia Commons' },
-    { file: 'audio/city_seaside_port.mp3', background: 'image/city_seaside_port_bg.png', title: 'Seaside City Port', artist: 'Wikimedia Commons' },
-    { file: 'audio/Dawn_Chorus.mp3', background: 'image/Dawn_Chorus_bg.png', title: 'Suburban Dawn', artist: 'Wikimedia Commons' },
+    // Crickets
+    { file: 'audio/AN_Cricket_and_Birds_at_Dusk.mp3', background: 'image/crickets_birds_bg.png', title: 'Crickets (Dusk with Birds)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Crickets_and_Woodpecker_at_Dusk.mp3', background: 'image/crickets_dusk_bg.png', title: 'Crickets (Dusk with Woodpecker)', artist: 'Wikimedia Commons' },
+    
+    // Lamington
     { file: 'audio/australia_lamington_national_park.mp3', background: 'image/australia_lamington_national_park_bg.png', title: 'Lamington National Park (Australia)', artist: 'Wikimedia Commons' },
-    { file: 'audio/rain_song.mp3', background: 'image/rain_thunder_bg.png', title: 'Rain & Thunder', artist: 'Wikimedia Commons' }
+    
+    // Morning
+    { file: 'audio/morning_garden.mp3', background: 'image/morning_garden_bg.png', title: 'Morning (In The Garden)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Morning_Bird_Chorus_at_Dawn_with_Bullfrogs.mp3', background: 'image/morning_river_bg.png', title: 'Morning (On The River)', artist: 'Wikimedia Commons' },
+    
+    // Night
+    { file: 'audio/AN_Night_Ambience_in_Forest_with_Stream.mp3', background: 'image/forest_night_bg.png', title: 'Night (Forest Ambience)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Spring_Peeper_and_American_Toad_Chorus_at_Night.mp3', background: 'image/amphibian_night_bg.png', title: 'Night (Amphibian Chorus)', artist: 'Wikimedia Commons' },
+    
+    // Ocean
+    { file: 'audio/AN_Underwater_Ocean_Waves_in_a_Tidepool.mp3', background: 'image/ocean_tidepool_bg.png', title: 'Ocean (Tidepool Waves)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Rapidly_Rising_Ocean_Tide_at_Sunset.mp3', background: 'image/ocean_tide_bg.png', title: 'Ocean (Rising Tide at Sunset)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Crashing_Ocean_Waves_with_Small_Pebbles.mp3', background: 'image/ocean_crashing_bg.png', title: 'Ocean (Crashing Waves)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Crashing_Waves_in_an_Ocean_Cave.mp3', background: 'image/ocean_cave_bg.png', title: 'Ocean (Crashing Cave Waves)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Powerful_Ocean_Waves_at_the_Beach.mp3', background: 'image/ocean_waves_bg.png', title: 'Ocean (Beach Waves)', artist: 'Wikimedia Commons' },
+    
+    // Rain
+    { file: 'audio/AN_Light_Rain_Falling_on_Tent_with_Rolling _Thunder.mp3', background: 'image/tent_rain_bg.png', title: 'Rain (Gentle on a Tent)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Melting_Dripping_Icicles.mp3', background: 'image/icicles_bg.png', title: 'Rain (Easy)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN _Light_Rainfall_in_a_Swamp_with_Singing_Birds.mp3', background: 'image/marsh_rain_bg.png', title: 'Rain (Easy in Marsh with Birds)', artist: 'Wikimedia Commons' },
+    { file: 'audio/light_rain.mp3', background: 'image/light_rain_bg.png', title: 'Rain (Medium)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Rain_Shower_with_Distant_Rolling_Thunder.mp3', background: 'image/calm_rain_bg.png', title: 'Rain (Heavy with Thunder)', artist: 'Wikimedia Commons' },
+    
+    // River
+    { file: 'audio/AN_Medium_Flow_Stream.mp3', background: 'image/gentle_river_bg.png', title: 'River (Gentle)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Up_Close_Stream.mp3', background: 'image/easy_river_bg.png', title: 'River (Easy)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Detailed_Gentle_Stream_Flow.mp3', background: 'image/medium_flow_river_bg.png', title: 'River (Medium)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Turbulent_Stream_in_a_Forest.mp3', background: 'image/turbulent_stream_bg.png', title: 'River (Heavy)', artist: 'Wikimedia Commons' },
+    
+    // Seaside
+    { file: 'audio/city_seaside_port.mp3', background: 'image/city_seaside_port_bg.png', title: 'Seaside City Port', artist: 'Wikimedia Commons' },
+    
+    // Stream
+    { file: 'audio/AN_Gentle_Flowing_Stream.mp3', background: 'image/gentle_stream_bg.png', title: 'Stream (Gentle)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Babbling_Brook.mp3', background: 'image/babbling_brook_bg.png', title: 'Stream (Easy)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Fast_Flowing_Stream_in_a_Forest_with_Birds.mp3', background: 'image/medium_stream_bg.png', title: 'Stream (Medium)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Nightfall_on_a_with_River_Birds_Fish_Frogs.mp3', background: 'image/stream_wildlife_bg.png', title: 'Stream (Wildlife at Dusk)', artist: 'Wikimedia Commons' },
+    
+    // Thunderstorm
+    { file: 'audio/AN_Distant_Thunder_and_Water_Dripping_from_Forest_Canopy.mp3', background: 'image/forest_thunder_bg.png', title: 'Thunderstorm (Distant in Forest)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Thunder_Storm_Approaching.mp3', background: 'image/rain_thunder_bg.png', title: 'Thunderstorm (Approaching)', artist: 'Wikimedia Commons' },
+    
+    // Waterfall
+    { file: 'audio/AN_Waterfall.mp3', background: 'image/waterfall_bg.png', title: 'Waterfall', artist: 'Wikimedia Commons' },
+    
+    // Winds
+    { file: 'audio/AN_Gentle_Wind_On_A_Mountaintop.mp3', background: 'image/mountain_breeze_bg.png', title: 'Winds (Gentle Mountain Breeze)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Empty_Winter_Wind_at_Night.mp3', background: 'image/winter_wind_bg.png', title: 'Winds (Winter Mountain Forest)', artist: 'Wikimedia Commons' }
 ];
 
 // Fade effect functions
@@ -155,7 +201,7 @@ function updateSelectOptions() {
         if (!favoritesOnly || favorites.includes(track.file)) {
             const option = document.createElement('option');
             option.value = track.file;
-            option.textContent = track.title;
+            option.textContent = favorites.includes(track.file) ? `${track.title} ❤️` : track.title;
             audioSelect.appendChild(option);
         }
     });
@@ -208,7 +254,7 @@ prevBtn.addEventListener('click', () => {
         ? audioFiles.filter(track => favorites.includes(track.file))
         : audioFiles;
     
-    let currentIndex = availableTracks.findIndex(track => audioPlayer.src.includes(track.file));
+    let currentIndex = availableTracks.findIndex(track => track.file === audioSelect.value);
 
     if (currentIndex > 0) {
         currentIndex--;
@@ -228,7 +274,7 @@ nextBtn.addEventListener('click', () => {
         ? audioFiles.filter(track => favorites.includes(track.file))
         : audioFiles;
     
-    let currentIndex = availableTracks.findIndex(track => audioPlayer.src.includes(track.file));
+    let currentIndex = availableTracks.findIndex(track => track.file === audioSelect.value);
     
     if (currentIndex < availableTracks.length - 1) {
         currentIndex++;
@@ -454,10 +500,13 @@ document.addEventListener('DOMContentLoaded', () => {
             updateFavoriteCheckbox(selectedTrack.file);
         }
     } else {
-        // Initialize with the first track (Light Rain)
-        const initialTrack = audioFiles[0];
-        updateAudioSource(initialTrack);
-        updateFavoriteCheckbox(initialTrack.file);
+        // Initialize with Rain (Medium) for new visitors
+        const defaultTrack = audioFiles.find(track => track.file === 'audio/light_rain.mp3');
+        if (defaultTrack) {
+            audioSelect.value = defaultTrack.file;
+            updateAudioSource(defaultTrack);
+            updateFavoriteCheckbox(defaultTrack.file);
+        }
     }
 
     if (volume) {
