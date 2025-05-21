@@ -71,7 +71,7 @@ const audioFiles = [
     { file: 'audio/AN_Light_Rain_Falling_on_Tent_with_Rolling _Thunder.mp3', background: 'image/tent_rain_bg.png', title: 'Rain (Gentle on a Tent)', artist: 'Wikimedia Commons' },
     { file: 'audio/AN_Melting_Dripping_Icicles.mp3', background: 'image/icicles_bg.png', title: 'Rain (Easy)', artist: 'Wikimedia Commons' },
     { file: 'audio/AN _Light_Rainfall_in_a_Swamp_with_Singing_Birds.mp3', background: 'image/marsh_rain_bg.png', title: 'Rain (Easy in Marsh with Birds)', artist: 'Wikimedia Commons' },
-    { file: 'audio/light_rain.mp3', background: 'image/light_rain_bg.png', title: 'Rain (Medium)', artist: 'Wikimedia Commons' },
+    { file: 'audio/light_rain.mp3', background: 'image/rain_medium_bg.png', title: 'Rain (Medium)', artist: 'Wikimedia Commons' },
     { file: 'audio/AN_Rain_Shower_with_Distant_Rolling_Thunder.mp3', background: 'image/calm_rain_bg.png', title: 'Rain (Heavy with Thunder)', artist: 'Wikimedia Commons' },
     
     // River
@@ -223,6 +223,7 @@ async function updateAudioSource(newSource) {
     }
     
     audioPlayer.src = newSource.file;
+    audioPlayer.loop = true; // Explicitly set loop to true
     audioPlayer.load();
     body.style.backgroundImage = `url("${newSource.background}")`;
 
@@ -301,9 +302,15 @@ playPauseBtn.addEventListener('click', async () => {
     isPlaying = !isPlaying;
 });
 
+// Add event listener for when audio ends (as a fallback)
 audioPlayer.addEventListener('ended', () => {
-    isPlaying = false;
-    playPauseBtn.textContent = '▶️';
+    if (audioPlayer.loop) {
+        audioPlayer.currentTime = 0;
+        audioPlayer.play();
+    } else {
+        isPlaying = false;
+        playPauseBtn.textContent = '▶️';
+    }
 });
 
 // Volume Control Event Listener
