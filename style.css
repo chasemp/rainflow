@@ -303,3 +303,13 @@ body {
 .notification.show {
     opacity: 1;
 }
+
+.artist-link {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s ease;
+}
+
+.artist-link:hover {
+    opacity: 0.8;
+}

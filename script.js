@@ -46,59 +46,61 @@ try {
 // Array of audio files and corresponding background images
 const audioFiles = [
     // Crickets
-    { file: 'audio/AN_Cricket_and_Birds_at_Dusk.mp3', background: 'image/crickets_birds_bg.png', title: 'Crickets (Dusk with Birds)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Crickets_and_Woodpecker_at_Dusk.mp3', background: 'image/crickets_dusk_bg.png', title: 'Crickets (Dusk with Woodpecker)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Cricket_and_Birds_at_Dusk.mp3', background: 'image/crickets_birds_bg.png', title: 'Crickets (Dusk with Birds)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/AN_Crickets_and_Woodpecker_at_Dusk.mp3', background: 'image/crickets_dusk_bg.png', title: 'Crickets (Dusk with Woodpecker)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
     
     // Lamington
-    { file: 'audio/australia_lamington_national_park.mp3', background: 'image/australia_lamington_national_park_bg.png', title: 'Lamington National Park (Australia)', artist: 'Wikimedia Commons' },
+    { file: 'audio/australia_lamington_national_park.mp3', background: 'image/australia_lamington_national_park_bg.png', title: 'Lamington National Park (Australia)', artist: 'Wikimedia Commons', artistUrl: 'https://commons.wikimedia.org/wiki/File:Short_nature_soundscape,_Lamington_National_Park,_Australia.ogg' },
     
     // Morning
-    { file: 'audio/morning_garden.mp3', background: 'image/morning_garden_bg.png', title: 'Morning (In The Garden)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Morning_Bird_Chorus_at_Dawn_with_Bullfrogs.mp3', background: 'image/morning_river_bg.png', title: 'Morning (On The River)', artist: 'Wikimedia Commons' },
+    { file: 'audio/morning_garden.mp3', background: 'image/morning_garden_bg.png', title: 'Morning (In The Garden)', artist: 'Wikimedia Commons', artistUrl: 'https://commons.wikimedia.org/wiki/File:Morning_garden_sounds_2020-06-13_0942_1044.mp3' },
+    { file: 'audio/AN_Morning_Bird_Chorus_at_Dawn_with_Bullfrogs.mp3', background: 'image/morning_river_bg.png', title: 'Morning (On The River)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
     
     // Night
-    { file: 'audio/AN_Night_Ambience_in_Forest_with_Stream.mp3', background: 'image/forest_night_bg.png', title: 'Night (Forest Ambience)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Spring_Peeper_and_American_Toad_Chorus_at_Night.mp3', background: 'image/amphibian_night_bg.png', title: 'Night (Amphibian Chorus)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Night_Ambience_in_Forest_with_Stream.mp3', background: 'image/forest_night_bg.png', title: 'Night (Forest Ambience)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/AN_Spring_Peeper_and_American_Toad_Chorus_at_Night.mp3', background: 'image/amphibian_night_bg.png', title: 'Night (Amphibian Chorus)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
     
     // Ocean
-    { file: 'audio/AN_Underwater_Ocean_Waves_in_a_Tidepool.mp3', background: 'image/ocean_tidepool_bg.png', title: 'Ocean (Tidepool Waves)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Rapidly_Rising_Ocean_Tide_at_Sunset.mp3', background: 'image/ocean_tide_bg.png', title: 'Ocean (Rising Tide at Sunset)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Crashing_Ocean_Waves_with_Small_Pebbles.mp3', background: 'image/ocean_crashing_bg.png', title: 'Ocean (Crashing Waves)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Crashing_Waves_in_an_Ocean_Cave.mp3', background: 'image/ocean_cave_bg.png', title: 'Ocean (Crashing Cave Waves)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Powerful_Ocean_Waves_at_the_Beach.mp3', background: 'image/ocean_waves_bg.png', title: 'Ocean (Beach Waves)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Underwater_Ocean_Waves_in_a_Tidepool.mp3', background: 'image/ocean_tidepool_bg.png', title: 'Ocean (Tidepool Waves)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/AN_Rapidly_Rising_Ocean_Tide_at_Sunset.mp3', background: 'image/ocean_tide_bg.png', title: 'Ocean (Rising Tide at Sunset)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/AN_Crashing_Ocean_Waves_with_Small_Pebbles.mp3', background: 'image/ocean_crashing_bg.png', title: 'Ocean (Crashing Waves)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/AN_Crashing_Waves_in_an_Ocean_Cave.mp3', background: 'image/ocean_cave_bg.png', title: 'Ocean (Crashing Cave Waves)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/AN_Powerful_Ocean_Waves_at_the_Beach.mp3', background: 'image/ocean_waves_bg.png', title: 'Ocean (Beach Waves)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
     
     // Rain
-    { file: 'audio/AN_Light_Rain_Falling_on_Tent_with_Rolling _Thunder.mp3', background: 'image/tent_rain_bg.png', title: 'Rain (Gentle on a Tent)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Melting_Dripping_Icicles.mp3', background: 'image/icicles_bg.png', title: 'Rain (Easy)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN _Light_Rainfall_in_a_Swamp_with_Singing_Birds.mp3', background: 'image/marsh_rain_bg.png', title: 'Rain (Easy in Marsh with Birds)', artist: 'Wikimedia Commons' },
-    { file: 'audio/light_rain.mp3', background: 'image/rain_medium_bg.png', title: 'Rain (Medium)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Rain_Shower_with_Distant_Rolling_Thunder.mp3', background: 'image/calm_rain_bg.png', title: 'Rain (Heavy with Thunder)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Light_Rain_Falling_on_Tent_with_Rolling _Thunder.mp3', background: 'image/tent_rain_bg.png', title: 'Rain (Gentle on a Tent)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/AN_Melting_Dripping_Icicles.mp3', background: 'image/icicles_bg.png', title: 'Rain (Easy)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/AN _Light_Rainfall_in_a_Swamp_with_Singing_Birds.mp3', background: 'image/marsh_rain_bg.png', title: 'Rain (Easy in Marsh with Birds)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/light_rain.mp3', background: 'image/rain_medium_bg.png', title: 'Rain (Medium)', artist: 'Wikimedia Commons', artistUrl: 'https://commons.wikimedia.org/wiki/File:Falling_Rain_SFX_1_2016-11-19.oga' },
+    
+    { file: 'audio/AN_Rain_Shower_with_Distant_Rolling_Thunder.mp3', background: 'image/calm_rain_bg.png', title: 'Rain (Heavy with Thunder)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
     
     // River
-    { file: 'audio/AN_Medium_Flow_Stream.mp3', background: 'image/gentle_river_bg.png', title: 'River (Gentle)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Up_Close_Stream.mp3', background: 'image/easy_river_bg.png', title: 'River (Easy)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Detailed_Gentle_Stream_Flow.mp3', background: 'image/medium_flow_river_bg.png', title: 'River (Medium)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Turbulent_Stream_in_a_Forest.mp3', background: 'image/turbulent_stream_bg.png', title: 'River (Heavy)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Medium_Flow_Stream.mp3', background: 'image/gentle_river_bg.png', title: 'River (Gentle)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/AN_Up_Close_Stream.mp3', background: 'image/easy_river_bg.png', title: 'River (Easy)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/AN_Detailed_Gentle_Stream_Flow.mp3', background: 'image/medium_flow_river_bg.png', title: 'River (Medium)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/AN_Turbulent_Stream_in_a_Forest.mp3', background: 'image/turbulent_stream_bg.png', title: 'River (Heavy)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
     
     // Seaside
-    { file: 'audio/city_seaside_port.mp3', background: 'image/city_seaside_port_bg.png', title: 'Seaside City Port', artist: 'Wikimedia Commons' },
+    { file: 'audio/city_seaside_port.mp3', background: 'image/city_seaside_port_bg.png', title: 'Seaside City Port', artist: 'Wikimedia Commons', artistUrl: 'https://commons.wikimedia.org/wiki/File:Sunday_in_the_city_street_noise3.ogg' },
     
     // Stream
-    { file: 'audio/AN_Gentle_Flowing_Stream.mp3', background: 'image/gentle_stream_bg.png', title: 'Stream (Gentle)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Babbling_Brook.mp3', background: 'image/babbling_brook_bg.png', title: 'Stream (Easy)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Fast_Flowing_Stream_in_a_Forest_with_Birds.mp3', background: 'image/medium_stream_bg.png', title: 'Stream (Medium)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Nightfall_on_a_with_River_Birds_Fish_Frogs.mp3', background: 'image/stream_wildlife_bg.png', title: 'Stream (Wildlife at Dusk)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Gentle_Flowing_Stream.mp3', background: 'image/gentle_stream_bg.png', title: 'Stream (Gentle)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/AN_Babbling_Brook.mp3', background: 'image/babbling_brook_bg.png', title: 'Stream (Easy)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/AN_Fast_Flowing_Stream_in_a_Forest_with_Birds.mp3', background: 'image/medium_stream_bg.png', title: 'Stream (Medium)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/AN_Nightfall_on_a_with_River_Birds_Fish_Frogs.mp3', background: 'image/stream_wildlife_bg.png', title: 'Stream (Wildlife at Dusk)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
     
     // Thunderstorm
-    { file: 'audio/AN_Distant_Thunder_and_Water_Dripping_from_Forest_Canopy.mp3', background: 'image/forest_thunder_bg.png', title: 'Thunderstorm (Distant in Forest)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Thunder_Storm_Approaching.mp3', background: 'image/rain_thunder_bg.png', title: 'Thunderstorm (Approaching)', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Distant_Thunder_and_Water_Dripping_from_Forest_Canopy.mp3', background: 'image/forest_thunder_bg.png', title: 'Thunderstorm (Distant in Forest)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/AN_Thunder_Storm_Approaching.mp3', background: 'image/rain_thunder_bg.png', title: 'Thunderstorm (Approaching)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
     
     // Waterfall
-    { file: 'audio/AN_Waterfall.mp3', background: 'image/waterfall_bg.png', title: 'Waterfall', artist: 'Wikimedia Commons' },
+    { file: 'audio/AN_Waterfall.mp3', background: 'image/waterfall_bg.png', title: 'Waterfall (Easy)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/relax_waterfall.mp3', background: 'image/waterfall_medium_bg.png', title: 'Waterfall (Medium)', artist: 'Wikimedia Commons', artistUrl: 'https://commons.wikimedia.org/wiki/File:Relaxing_Waterfall_ASMR_-_JD_Savanyu.webm' },
     
     // Winds
-    { file: 'audio/AN_Gentle_Wind_On_A_Mountaintop.mp3', background: 'image/mountain_breeze_bg.png', title: 'Winds (Gentle Mountain Breeze)', artist: 'Wikimedia Commons' },
-    { file: 'audio/AN_Empty_Winter_Wind_at_Night.mp3', background: 'image/winter_wind_bg.png', title: 'Winds (Winter Mountain Forest)', artist: 'Wikimedia Commons' }
+    { file: 'audio/AN_Gentle_Wind_On_A_Mountaintop.mp3', background: 'image/mountain_breeze_bg.png', title: 'Winds (Gentle Mountain Breeze)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' },
+    { file: 'audio/AN_Empty_Winter_Wind_at_Night.mp3', background: 'image/winter_wind_bg.png', title: 'Winds (Winter Mountain Forest)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com' }
 ];
 
 // Fade effect functions
@@ -212,7 +214,7 @@ function updateSelectOptions() {
 // Add heart icon to the track info section
 function updateTrackInfo(newSource) {
     const trackInfo = document.querySelector('.track-info p');
-    trackInfo.innerHTML = `Now Playing: <span id="track-title">${newSource.title}</span> - <span id="track-artist">${newSource.artist}</span>`;
+    trackInfo.innerHTML = `Now Playing: <span id="track-title">${newSource.title}</span> - <a href="${newSource.artistUrl}" target="_blank" rel="noopener noreferrer" id="track-artist" class="artist-link">${newSource.artist}</a>`;
     updateFavoriteCheckbox(newSource.file);
 }
 
