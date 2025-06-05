@@ -210,6 +210,23 @@ function buildCategorizedDropdown(currentTrackFile = null) {
     const currentTrack = audioFiles.find(track => track.file === currentTrackFile);
     const currentCategory = currentTrack ? currentTrack.category : 'Rain'; // Default to Rain
     
+    // Category emojis
+    const categoryEmojis = {
+        'Crickets': '🦗',
+        'Fire': '🔥',
+        'Lamington': '🇦🇺',
+        'Morning': '🌅',
+        'Night': '🌙',
+        'Ocean': '🌊',
+        'Rain': '🌧️',
+        'River': '🏞️',
+        'Seaside': '🏖️',
+        'Stream': '💧',
+        'Thunderstorm': '⛈️',
+        'Waterfall': '💦',
+        'Winds': '💨'
+    };
+    
     // Group tracks by category
     const categories = {};
     audioFiles.forEach(track => {
@@ -229,10 +246,11 @@ function buildCategorizedDropdown(currentTrackFile = null) {
     let html = '';
     sortedCategories.forEach(categoryName => {
         const isExpanded = categoryName === currentCategory;
+        const emoji = categoryEmojis[categoryName] || '🎵';
         html += `
             <div class="dropdown-category">
                 <div class="category-header ${isExpanded ? 'expanded' : ''}" data-category="${categoryName}">
-                    <span>${categoryName}</span>
+                    <span>${emoji} ${categoryName}</span>
                     <span class="category-arrow">▶</span>
                 </div>
                 <div class="category-tracks ${isExpanded ? 'expanded' : ''}">
@@ -261,7 +279,7 @@ function buildFavoritesDropdown() {
     let html = `
         <div class="dropdown-category favorites-category">
             <div class="category-header expanded" data-category="Favorites">
-                <span>Favorites</span>
+                <span>❤️ Favorites</span>
                 <span class="category-arrow">▶</span>
             </div>
             <div class="category-tracks expanded">
