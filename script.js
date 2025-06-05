@@ -54,6 +54,10 @@ const audioFiles = [
     { file: 'audio/AN_Cricket_and_Birds_at_Dusk.mp3', background: 'image/crickets_birds_bg.png', title: 'Crickets (Dusk with Birds)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com', category: 'Crickets', displayName: 'Dusk with Birds' },
     { file: 'audio/AN_Crickets_and_Woodpecker_at_Dusk.mp3', background: 'image/crickets_dusk_bg.png', title: 'Crickets (Dusk with Woodpecker)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com', category: 'Crickets', displayName: 'Dusk with Woodpecker' },
     
+    // Fire
+    { file: 'audio/YT_fireplace.mp3', background: 'image/fireplace.jpg', title: 'Fire (Fireplace)', artist: 'Shurooq Siddiqui', artistUrl: 'https://www.youtube.com/watch?v=HJIGwOB84pQ', category: 'Fire', displayName: 'Fireplace' },
+    { file: 'audio/YT_Roaring_Campfire.mp3', background: 'image/roaring_campfire.jpg', title: 'Fire (Roaring Campfire)', artist: 'Shurooq Siddiqui', artistUrl: 'https://www.youtube.com/channel/UC8GNHHbLg6ByCN1DZcUjylQ/videos', category: 'Fire', displayName: 'Roaring Campfire' },
+    
     // Lamington
     { file: 'audio/australia_lamington_national_park.mp3', background: 'image/australia_lamington_national_park_bg.png', title: 'Lamington National Park (Australia)', artist: 'Wikimedia Commons', artistUrl: 'https://commons.wikimedia.org/wiki/File:Short_nature_soundscape,_Lamington_National_Park,_Australia.ogg', category: 'Lamington', displayName: 'National Park (Australia)' },
     
@@ -68,16 +72,17 @@ const audioFiles = [
     // Ocean
     { file: 'audio/AN_Underwater_Ocean_Waves_in_a_Tidepool.mp3', background: 'image/ocean_tidepool_bg.png', title: 'Ocean (Tidepool Waves)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com', category: 'Ocean', displayName: 'Tidepool Waves' },
     { file: 'audio/AN_Rapidly_Rising_Ocean_Tide_at_Sunset.mp3', background: 'image/ocean_tide_bg.png', title: 'Ocean (Rising Tide at Sunset)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com', category: 'Ocean', displayName: 'Rising Tide at Sunset' },
+    { file: 'audio/AN_Powerful_Ocean_Waves_at_the_Beach.mp3', background: 'image/ocean_waves_bg.png', title: 'Ocean (Beach Waves)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com', category: 'Ocean', displayName: 'Beach Waves' },
     { file: 'audio/AN_Crashing_Ocean_Waves_with_Small_Pebbles.mp3', background: 'image/ocean_crashing_bg.png', title: 'Ocean (Crashing Waves)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com', category: 'Ocean', displayName: 'Crashing Waves' },
     { file: 'audio/AN_Crashing_Waves_in_an_Ocean_Cave.mp3', background: 'image/ocean_cave_bg.png', title: 'Ocean (Crashing Cave Waves)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com', category: 'Ocean', displayName: 'Crashing Cave Waves' },
-    { file: 'audio/AN_Powerful_Ocean_Waves_at_the_Beach.mp3', background: 'image/ocean_waves_bg.png', title: 'Ocean (Beach Waves)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com', category: 'Ocean', displayName: 'Beach Waves' },
     
     // Rain
-    { file: 'audio/AN_Light_Rain_Falling_on_Tent_with_Rolling _Thunder.mp3', background: 'image/tent_rain_bg.png', title: 'Rain (Gentle on a Tent)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com', category: 'Rain', displayName: 'Gentle on a Tent' },
     { file: 'audio/AN_Melting_Dripping_Icicles.mp3', background: 'image/icicles_bg.png', title: 'Rain (Easy)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com', category: 'Rain', displayName: 'Easy' },
     { file: 'audio/AN _Light_Rainfall_in_a_Swamp_with_Singing_Birds.mp3', background: 'image/marsh_rain_bg.png', title: 'Rain (Easy in Marsh with Birds)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com', category: 'Rain', displayName: 'Easy in Marsh with Birds' },
+    { file: 'audio/AN_Light_Rain_Falling_on_Tent_with_Rolling _Thunder.mp3', background: 'image/tent_rain_bg.png', title: 'Rain (Gentle on a Tent)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com', category: 'Rain', displayName: 'Gentle on a Tent' },
     { file: 'audio/light_rain.mp3', background: 'image/rain_medium_bg.png', title: 'Rain (Medium)', artist: 'Wikimedia Commons', artistUrl: 'https://commons.wikimedia.org/wiki/File:Falling_Rain_SFX_1_2016-11-19.oga', category: 'Rain', displayName: 'Medium' },
-    { file: 'audio/AN_Rain_Shower_with_Distant_Rolling_Thunder.mp3', background: 'image/calm_rain_bg.png', title: 'Rain (Heavy with Thunder)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com', category: 'Rain', displayName: 'Heavy with Thunder' },
+    { file: 'audio/AN_Rain_Shower_with_Distant_Rolling_Thunder.mp3', background: 'image/calm_rain_bg.png', title: 'Rain (Medium with Thunder)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com', category: 'Rain', displayName: 'Medium with Thunder' },
+    { file: 'audio/FS_heavy_rain_pink_noise.mp3', background: 'image/heavy_rain.jpg', title: 'Rain (Heavy)', artist: 'Freesound.org', artistUrl: 'https://freesound.org/people/jsuite22/sounds/751512/', category: 'Rain', displayName: 'Heavy' },
     
     // River
     { file: 'audio/AN_Medium_Flow_Stream.mp3', background: 'image/gentle_river_bg.png', title: 'River (Gentle)', artist: 'Acoustic Nature', artistUrl: 'https://acousticnature.com', category: 'River', displayName: 'Gentle' },
