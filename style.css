@@ -117,47 +117,8 @@ body {
     margin-bottom: 20px;
 }
 
-.audio-selector select {
-    padding: 8px 12px;
-    font-size: 14px;
-    min-width: 200px;
-    margin: 0 auto;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    color: #333;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 8.825L1.175 4 2.05 3.125 6 7.075 9.95 3.125 10.825 4z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    padding-right: 30px;
-}
 
-.audio-selector select:hover {
-    border-color: rgba(0, 0, 0, 0.2);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
 
-.audio-selector select:focus {
-    outline: none;
-    border-color: rgba(0, 0, 0, 0.2);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-}
-
-.audio-selector select option {
-    padding: 8px 12px;
-    font-size: 14px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background-color: white;
-    color: #333;
-}
-
-.audio-selector select option:hover {
-    background-color: #f5f5f5;
-}
 
 #favorites-toggle {
     background: none;
@@ -312,4 +273,145 @@ body {
 
 .artist-link:hover {
     opacity: 0.8;
+}
+
+/* Custom Dropdown Styling */
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+    min-width: 200px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.dropdown-selected {
+    padding: 8px 30px 8px 12px;
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.dropdown-selected:hover {
+    border-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.dropdown-selected.open {
+    border-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.dropdown-arrow {
+    transition: transform 0.2s ease;
+    font-size: 12px;
+}
+
+.dropdown-selected.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-options.show {
+    display: block;
+}
+
+.dropdown-category {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdown-category:last-child {
+    border-bottom: none;
+}
+
+.category-header {
+    padding: 10px 12px;
+    font-weight: bold;
+    color: #555;
+    background-color: rgba(240, 240, 240, 0.9);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+    user-select: none;
+}
+
+.category-header:hover {
+    background-color: rgba(230, 230, 230, 0.9);
+}
+
+.category-arrow {
+    transition: transform 0.2s ease;
+    font-size: 12px;
+}
+
+.category-header.expanded .category-arrow {
+    transform: rotate(90deg);
+}
+
+.category-tracks {
+    display: none;
+}
+
+.category-tracks.expanded {
+    display: block;
+}
+
+.dropdown-option {
+    padding: 8px 20px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid #f8f8f8;
+}
+
+.dropdown-option:last-child {
+    border-bottom: none;
+}
+
+.dropdown-option:hover {
+    background-color: #f5f5f5;
+}
+
+.dropdown-option.selected {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.favorites-category {
+    background-color: rgba(255, 240, 245, 0.9);
+}
+
+.favorites-category .category-header {
+    background-color: rgba(255, 240, 245, 0.9);
+    color: #d81b60;
+}
+
+.favorites-category .category-header:hover {
+    background-color: rgba(255, 230, 240, 0.9);
 }
