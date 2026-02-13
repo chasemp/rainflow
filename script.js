@@ -1,6 +1,17 @@
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js')
-        .then(registration => console.log('Service Worker registered with scope:', registration.scope))
+        .then(registration => {
+            console.log('Service Worker registered with scope:', registration.scope);
+            // Check for updates periodically when online
+            registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'activated' && navigator.serviceWorker.controller) {
+                        showNotification('App updated! New content is available.');
+                    }
+                });
+            });
+        })
         .catch(error => console.error('Service Worker registration failed:', error));
 }
 
@@ -678,61 +689,39 @@ document.addEventListener('DOMContentLoaded', () => {
         volumeSlider.value = volume; // Set volume slider to last volume
         audioPlayer.volume = volume;
     }
+
+    // Initialize online status indicator
+    updateOnlineStatus();
 });
 
-// Add online/offline status handling
-async function checkServerConnectivity() {
-    try {
-        const response = await fetch('/icon.png', { method: 'HEAD' });
-        return response.ok;
-    } catch (error) {
-        console.log('Server connectivity check failed:', error);
-        return false;
-    }
-}
-
-async function updateOnlineStatus() {
+// Online/offline status handling using browser events (no polling)
+function updateOnlineStatus() {
     const wifiStatus = document.getElementById('wifi-status');
     if (!wifiStatus) return;
 
-    const isServerReachable = await checkServerConnectivity();
-    
-    if (navigator.onLine && isServerReachable) {
-        wifiStatus.classList.remove('offline');
+    if (navigator.onLine) {
+        wifiStatus.textContent = '\u{1F7E2}'; // green circle
         wifiStatus.title = 'Online';
-        console.log('App is online and server is reachable');
+        wifiStatus.classList.remove('offline');
+        console.log('App is online');
     } else {
+        wifiStatus.textContent = '\u{1F534}'; // red circle
+        wifiStatus.title = 'Offline - playing from cache';
         wifiStatus.classList.add('offline');
-        wifiStatus.title = 'Offline';
-        console.log('App is offline or server is unreachable');
+        console.log('App is offline - serving from cache');
     }
 }
 
-// Add event listeners for online/offline status
 window.addEventListener('online', () => {
     console.log('Network connection restored');
     updateOnlineStatus();
+    showNotification('Back online');
 });
 
 window.addEventListener('offline', () => {
     console.log('Network connection lost');
     updateOnlineStatus();
-});
-
-// Check connectivity periodically
-setInterval(updateOnlineStatus, 30000); // Check every 30 seconds
-
-// Initialize online status when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    // Check initial online status
-    updateOnlineStatus();
-    
-    // Rest of your existing DOMContentLoaded code...
-    console.log('Initial favorites on page load:', favorites);
-    
-    const heartIcon = document.querySelector('.track-heart');
-    const favoriteCheckbox = document.querySelector('#favorite-track');
-    // ... rest of the existing code ...
+    showNotification('Offline - playing from cache');
 });
 
 // Function to show notification

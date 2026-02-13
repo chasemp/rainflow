@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rainflow-cache-v2';
+const CACHE_NAME = 'rainflow-cache-v3';
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
@@ -8,10 +8,12 @@ const ASSETS_TO_CACHE = [
     '/icon.png',
     '/splash-image.png',
     '/header_small.png',
-    
+
     // Audio files
     '/audio/AN_Cricket_and_Birds_at_Dusk.mp3',
     '/audio/AN_Crickets_and_Woodpecker_at_Dusk.mp3',
+    '/audio/YT_fireplace.mp3',
+    '/audio/YT_Roaring_Campfire.mp3',
     '/audio/australia_lamington_national_park.mp3',
     '/audio/morning_garden.mp3',
     '/audio/AN_Morning_Bird_Chorus_at_Dawn_with_Bullfrogs.mp3',
@@ -27,6 +29,7 @@ const ASSETS_TO_CACHE = [
     '/audio/AN _Light_Rainfall_in_a_Swamp_with_Singing_Birds.mp3',
     '/audio/light_rain.mp3',
     '/audio/AN_Rain_Shower_with_Distant_Rolling_Thunder.mp3',
+    '/audio/FS_heavy_rain_pink_noise.mp3',
     '/audio/AN_Medium_Flow_Stream.mp3',
     '/audio/AN_Up_Close_Stream.mp3',
     '/audio/AN_Detailed_Gentle_Stream_Flow.mp3',
@@ -39,12 +42,15 @@ const ASSETS_TO_CACHE = [
     '/audio/AN_Distant_Thunder_and_Water_Dripping_from_Forest_Canopy.mp3',
     '/audio/AN_Thunder_Storm_Approaching.mp3',
     '/audio/AN_Waterfall.mp3',
+    '/audio/relax_waterfall.mp3',
     '/audio/AN_Gentle_Wind_On_A_Mountaintop.mp3',
     '/audio/AN_Empty_Winter_Wind_at_Night.mp3',
-    
+
     // Image files
     '/image/crickets_birds_bg.png',
     '/image/crickets_dusk_bg.png',
+    '/image/fireplace.jpg',
+    '/image/roaring_campfire.jpg',
     '/image/australia_lamington_national_park_bg.png',
     '/image/morning_garden_bg.png',
     '/image/morning_river_bg.png',
@@ -59,7 +65,9 @@ const ASSETS_TO_CACHE = [
     '/image/icicles_bg.png',
     '/image/marsh_rain_bg.png',
     '/image/light_rain_bg.png',
+    '/image/rain_medium_bg.png',
     '/image/calm_rain_bg.png',
+    '/image/heavy_rain.jpg',
     '/image/gentle_river_bg.png',
     '/image/easy_river_bg.png',
     '/image/medium_flow_river_bg.png',
@@ -72,6 +80,7 @@ const ASSETS_TO_CACHE = [
     '/image/forest_thunder_bg.png',
     '/image/rain_thunder_bg.png',
     '/image/waterfall_bg.png',
+    '/image/waterfall_medium_bg.png',
     '/image/mountain_breeze_bg.png',
     '/image/winter_wind_bg.png'
 ];
@@ -90,7 +99,6 @@ self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then((cache) => {
-                // Use Promise.all to handle all cache operations
                 return Promise.all(
                     ASSETS_TO_CACHE.map(url => {
                         return cache.add(url).catch(error => {
@@ -99,6 +107,7 @@ self.addEventListener('install', (event) => {
                     })
                 );
             })
+            .then(() => self.skipWaiting())
     );
 });
 
@@ -106,16 +115,14 @@ self.addEventListener('fetch', (event) => {
     // Skip non-GET requests
     if (event.request.method !== 'GET') return;
 
-    // Skip non-cacheable URLs
-    if (!isCacheable(event.request.url)) {
-        return;
-    }
+    // Skip non-cacheable URLs (e.g. chrome-extension://)
+    if (!isCacheable(event.request.url)) return;
 
     event.respondWith(
         caches.match(event.request)
-            .then((response) => {
-                if (response) {
-                    return response;
+            .then((cachedResponse) => {
+                if (cachedResponse) {
+                    return cachedResponse;
                 }
 
                 return fetch(event.request)
@@ -125,18 +132,15 @@ self.addEventListener('fetch', (event) => {
                             return response;
                         }
 
-                        // Clone the response
+                        // Clone the response before caching
                         const responseToCache = response.clone();
 
-                        // Cache the fetched response
                         caches.open(CACHE_NAME)
                             .then((cache) => {
-                                if (isCacheable(event.request.url)) {
-                                    cache.put(event.request, responseToCache)
-                                        .catch(error => {
-                                            console.warn('Failed to cache response:', error);
-                                        });
-                                }
+                                cache.put(event.request, responseToCache)
+                                    .catch(error => {
+                                        console.warn('Failed to cache response:', error);
+                                    });
                             })
                             .catch(error => {
                                 console.warn('Failed to open cache:', error);
@@ -144,26 +148,28 @@ self.addEventListener('fetch', (event) => {
 
                         return response;
                     })
-                    .catch(error => {
-                        console.warn('Fetch failed:', error);
-                        // Return a fallback response if available
-                        return caches.match('/offline.html');
+                    .catch(() => {
+                        // If this is a navigation request, return cached index.html
+                        if (event.request.mode === 'navigate') {
+                            return caches.match('/index.html');
+                        }
+                        // For other requests (images, audio, etc.), there's nothing to fall back to
+                        return new Response('', { status: 503, statusText: 'Offline' });
                     });
             })
     );
 });
 
 self.addEventListener('activate', event => {
-    const cacheWhitelist = [CACHE_NAME];
     event.waitUntil(
         caches.keys().then(cacheNames => {
             return Promise.all(
                 cacheNames.map(cacheName => {
-                    if (cacheWhitelist.indexOf(cacheName) === -1) {
+                    if (cacheName !== CACHE_NAME) {
                         return caches.delete(cacheName);
                     }
                 })
             );
-        })
+        }).then(() => self.clients.claim())
     );
 });

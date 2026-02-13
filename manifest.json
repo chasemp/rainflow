@@ -1,10 +1,14 @@
 {
   "name": "Rainflow - Sounds for the Background",
   "short_name": "Rainflow",
+  "description": "Ambient nature sound player for focus, relaxation, and sleep.",
   "start_url": "index.html",
+  "scope": ".",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
+  "categories": ["entertainment", "lifestyle"],
   "icons": [
     {
       "src": "icon.png",
@@ -14,7 +18,8 @@
     {
       "src": "icon.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
